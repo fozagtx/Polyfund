@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount } from 'wagmi';
 import { GradientButton } from '@/components/ui/gradient-button';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { 
   LayoutDashboard, 
   Building2, 
@@ -67,8 +68,9 @@ export function Header() {
               })}
             </div>
 
-            {/* Right side - Connect Wallet */}
-            <div className="hidden sm:flex items-center">
+            {/* Right side - Theme Toggle & Connect Wallet */}
+            <div className="hidden sm:flex items-center gap-2">
+              <ThemeToggle />
               <ConnectButton.Custom>
                 {({
                   account,
