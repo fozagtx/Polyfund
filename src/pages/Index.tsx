@@ -48,15 +48,7 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-hero" />
-        <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-peach/10 rounded-full blur-[120px]" />
-          <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] bg-lavender/10 rounded-full blur-[100px]" />
-          <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-violet/20 rounded-full blur-[150px]" />
-        </div>
-        
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           {/* Hero container with rounded corners */}
           <div className="hero-container p-8 lg:p-16">
