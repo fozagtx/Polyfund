@@ -109,20 +109,19 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <OrbitVisualization 
-                centerValue={`${mockPlatformStats.totalBusinesses}+`}
-                centerLabel="Businesses"
-              />
+              <OrbitVisualization />
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Platform Stats */}
-      <PlatformStats stats={mockPlatformStats} />
+      <section className="py-20">
+        <PlatformStats stats={mockPlatformStats} />
+      </section>
 
       {/* Features Section */}
-      <section className="py-16 border-t border-border/50">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -160,7 +159,7 @@ const Index = () => {
       </section>
 
       {/* Featured Businesses */}
-      <section className="py-16 border-t border-border/50">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -196,7 +195,7 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 border-t border-border/50">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
