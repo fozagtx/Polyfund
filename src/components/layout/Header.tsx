@@ -25,10 +25,10 @@ export function Header() {
 
   return (
     <>
-      {/* Floating Bottom Navigation */}
-      <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+      {/* Floating Top Navigation */}
+      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex items-center gap-2 p-2 rounded-full bg-card/90 backdrop-blur-xl border border-border/50 shadow-lg"
@@ -97,10 +97,10 @@ export function Header() {
             onClick={() => setMobileMenuOpen(false)}
           >
             <motion.div
-              initial={{ opacity: 0, y: 100 }}
+              initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 100 }}
-              className="absolute bottom-24 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-sm"
+              exit={{ opacity: 0, y: -50 }}
+              className="absolute top-24 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-sm"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex flex-col gap-2 p-4 rounded-2xl bg-card/95 backdrop-blur-xl border border-border/50 shadow-lg">
