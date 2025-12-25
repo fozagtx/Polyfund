@@ -29,120 +29,130 @@ export function Header() {
 
   return (
     <>
-      {/* Floating Top Navigation */}
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex items-center gap-2 p-2 rounded-full bg-card/90 backdrop-blur-xl border border-border/50 shadow-lg"
-        >
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 px-4">
-            <div className="relative h-8 w-8">
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary to-cyan-400 animate-pulse-slow" />
-              <div className="absolute inset-0.5 rounded-lg bg-background flex items-center justify-center">
-                <span className="font-display font-bold text-primary">P</span>
-              </div>
-            </div>
-            <span className="font-display text-lg font-bold hidden sm:block">Polyfunds</span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
-            {visibleNavItems.map((item) => {
-              const isActive = location.pathname === item.path;
-              return (
-                <Link key={item.path} to={item.path}>
-                  <GradientButton
-                    variant={isActive ? 'default' : 'variant'}
-                    className={`min-w-0 px-5 py-3 text-sm ${
-                      isActive ? '' : 'opacity-80 hover:opacity-100'
-                    }`}
-                  >
-                    <item.icon className="h-4 w-4 mr-2" />
-                    {item.label}
-                  </GradientButton>
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Wallet Connect with Gradient Theme */}
-          <div className="hidden sm:block pl-2 pr-1">
-            <ConnectButton.Custom>
-              {({
-                account,
-                chain,
-                openAccountModal,
-                openChainModal,
-                openConnectModal,
-                mounted,
-              }) => {
-                const ready = mounted;
-                const connected = ready && account && chain;
-
-                return (
-                  <div
-                    {...(!ready && {
-                      'aria-hidden': true,
-                      style: {
-                        opacity: 0,
-                        pointerEvents: 'none',
-                        userSelect: 'none',
-                      },
-                    })}
-                  >
-                    {(() => {
-                      if (!connected) {
-                        return (
-                          <GradientButton
-                            onClick={openConnectModal}
-                            className="min-w-0 px-5 py-3 text-sm"
-                          >
-                            <Wallet className="h-4 w-4 mr-2" />
-                            Connect
-                          </GradientButton>
-                        );
-                      }
-
-                      if (chain.unsupported) {
-                        return (
-                          <GradientButton
-                            onClick={openChainModal}
-                            variant="variant"
-                            className="min-w-0 px-5 py-3 text-sm"
-                          >
-                            Wrong Network
-                          </GradientButton>
-                        );
-                      }
-
-                      return (
-                        <GradientButton
-                          onClick={openAccountModal}
-                          variant="variant"
-                          className="min-w-0 px-5 py-3 text-sm"
-                        >
-                          {account.displayName}
-                        </GradientButton>
-                      );
-                    })()}
-                  </div>
-                );
-              }}
-            </ConnectButton.Custom>
-          </div>
-          
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-3 rounded-full bg-secondary/50 hover:bg-secondary transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+      {/* Fixed Top Navigation */}
+      <header className="fixed top-0 left-0 right-0 z-50">
+        <div className="container mx-auto px-4 py-4">
+          <motion.nav
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center justify-between px-6 py-3 rounded-full bg-card/80 backdrop-blur-xl border border-border/30"
           >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </motion.div>
-      </nav>
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-2">
+              <div className="relative h-8 w-8">
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary to-lavender animate-pulse-slow" />
+                <div className="absolute inset-0.5 rounded-lg bg-background flex items-center justify-center">
+                  <span className="font-sans font-bold text-primary">P</span>
+                </div>
+              </div>
+              <span className="font-sans text-lg font-bold hidden sm:block">Polyfunds</span>
+            </Link>
+
+            {/* Desktop Navigation - Center */}
+            <div className="hidden md:flex items-center gap-1">
+              {visibleNavItems.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link key={item.path} to={item.path}>
+                    <button
+                      className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
+                        isActive 
+                          ? 'text-foreground' 
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Right side - Auth buttons */}
+            <div className="hidden sm:flex items-center gap-3">
+              <ConnectButton.Custom>
+                {({
+                  account,
+                  chain,
+                  openAccountModal,
+                  openChainModal,
+                  openConnectModal,
+                  mounted,
+                }) => {
+                  const ready = mounted;
+                  const connected = ready && account && chain;
+
+                  return (
+                    <div
+                      {...(!ready && {
+                        'aria-hidden': true,
+                        style: {
+                          opacity: 0,
+                          pointerEvents: 'none',
+                          userSelect: 'none',
+                        },
+                      })}
+                      className="flex items-center gap-3"
+                    >
+                      {(() => {
+                        if (!connected) {
+                          return (
+                            <>
+                              <button
+                                onClick={openConnectModal}
+                                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                              >
+                                Log In
+                              </button>
+                              <GradientButton
+                                onClick={openConnectModal}
+                                className="min-w-0 px-5 py-2.5 text-sm"
+                              >
+                                Join Now
+                              </GradientButton>
+                            </>
+                          );
+                        }
+
+                        if (chain.unsupported) {
+                          return (
+                            <GradientButton
+                              onClick={openChainModal}
+                              variant="variant"
+                              className="min-w-0 px-5 py-2.5 text-sm"
+                            >
+                              Wrong Network
+                            </GradientButton>
+                          );
+                        }
+
+                        return (
+                          <GradientButton
+                            onClick={openAccountModal}
+                            variant="variant"
+                            className="min-w-0 px-5 py-2.5 text-sm"
+                          >
+                            {account.displayName}
+                          </GradientButton>
+                        );
+                      })()}
+                    </div>
+                  );
+                }}
+              </ConnectButton.Custom>
+            </div>
+            
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2 rounded-full bg-secondary/50 hover:bg-secondary transition-colors"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </motion.nav>
+        </div>
+      </header>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
@@ -151,14 +161,14 @@ export function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-background/80 backdrop-blur-md md:hidden"
+            className="fixed inset-0 z-40 bg-background/90 backdrop-blur-md md:hidden"
             onClick={() => setMobileMenuOpen(false)}
           >
             <motion.div
-              initial={{ opacity: 0, y: -50 }}
+              initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -50 }}
-              className="absolute top-24 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-sm"
+              exit={{ opacity: 0, y: -20 }}
+              className="absolute top-24 left-4 right-4"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex flex-col gap-2 p-4 rounded-2xl bg-card/95 backdrop-blur-xl border border-border/50 shadow-lg">
@@ -170,17 +180,20 @@ export function Header() {
                       to={item.path}
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      <GradientButton
-                        variant={isActive ? 'default' : 'variant'}
-                        className="w-full justify-start"
+                      <button
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-colors ${
+                          isActive 
+                            ? 'bg-primary/10 text-foreground' 
+                            : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
+                        }`}
                       >
-                        <item.icon className="h-4 w-4 mr-2" />
+                        <item.icon className="h-5 w-5" />
                         {item.label}
-                      </GradientButton>
+                      </button>
                     </Link>
                   );
                 })}
-                <div className="pt-2 border-t border-border/50">
+                <div className="pt-2 mt-2 border-t border-border/50">
                   <ConnectButton.Custom>
                     {({
                       account,

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,64 +6,79 @@
 
 @layer base {
   :root {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
+    /* Marketeam-inspired color palette */
+    --background: 248 15% 6%;
+    --foreground: 0 0% 98%;
 
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
+    --card: 248 20% 10%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 222 47% 10%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 248 20% 12%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 173 80% 50%;
-    --primary-foreground: 222 47% 6%;
+    /* Primary purple accent */
+    --primary: 258 82% 68%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 222 47% 14%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 248 20% 16%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 222 30% 18%;
-    --muted-foreground: 215 20% 55%;
+    --muted: 248 15% 20%;
+    --muted-foreground: 250 15% 65%;
 
-    --accent: 263 70% 60%;
-    --accent-foreground: 210 40% 98%;
+    /* Lavender accent */
+    --accent: 270 50% 60%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 72% 51%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
     --success: 142 70% 45%;
-    --success-foreground: 210 40% 98%;
+    --success-foreground: 0 0% 98%;
 
     --warning: 38 92% 50%;
-    --warning-foreground: 222 47% 6%;
+    --warning-foreground: 248 15% 6%;
 
-    --border: 222 30% 18%;
-    --input: 222 30% 18%;
-    --ring: 173 80% 50%;
+    /* Peach highlight */
+    --peach: 25 100% 85%;
+    --peach-foreground: 248 15% 6%;
 
-    --radius: 0.75rem;
+    /* Lavender */
+    --lavender: 270 50% 68%;
+    --lavender-foreground: 248 15% 6%;
 
-    --sidebar-background: 222 47% 8%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 173 80% 50%;
-    --sidebar-primary-foreground: 222 47% 6%;
-    --sidebar-accent: 222 47% 14%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 222 30% 18%;
-    --sidebar-ring: 173 80% 50%;
+    /* Deep violet */
+    --violet: 258 50% 28%;
+    --violet-foreground: 0 0% 98%;
+
+    --border: 248 20% 18%;
+    --input: 248 20% 18%;
+    --ring: 258 82% 68%;
+
+    --radius: 1rem;
+
+    --sidebar-background: 248 20% 10%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 258 82% 68%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 248 20% 16%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 248 20% 18%;
+    --sidebar-ring: 258 82% 68%;
 
     /* Custom gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(173 80% 50%) 0%, hsl(200 80% 50%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(263 70% 60%) 0%, hsl(290 70% 50%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(222 47% 10%) 0%, hsl(222 47% 8%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(222 47% 8%) 0%, hsl(222 47% 4%) 50%, hsl(222 47% 8%) 100%);
-    --gradient-glow: radial-gradient(ellipse at center, hsl(173 80% 50% / 0.15) 0%, transparent 70%);
+    --gradient-primary: linear-gradient(135deg, hsl(25 100% 85%) 0%, hsl(270 50% 68%) 50%, hsl(258 50% 28%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(25 100% 85% / 0.3) 0%, hsl(270 50% 68% / 0.2) 30%, hsl(258 50% 28% / 0.5) 60%, hsl(248 15% 6%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(248 20% 14% / 0.9) 0%, hsl(248 20% 10% / 0.9) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(258 82% 68% / 0.2) 0%, transparent 70%);
+    --gradient-button: linear-gradient(135deg, hsl(258 82% 68%) 0%, hsl(270 60% 55%) 100%);
 
     /* Shadows */
-    --shadow-sm: 0 2px 8px hsl(222 47% 4% / 0.4);
-    --shadow-md: 0 4px 16px hsl(222 47% 4% / 0.5);
-    --shadow-lg: 0 8px 32px hsl(222 47% 4% / 0.6);
-    --shadow-glow: 0 0 40px hsl(173 80% 50% / 0.25);
-    --shadow-glow-accent: 0 0 40px hsl(263 70% 60% / 0.25);
+    --shadow-sm: 0 2px 8px hsl(248 15% 4% / 0.4);
+    --shadow-md: 0 4px 16px hsl(248 15% 4% / 0.5);
+    --shadow-lg: 0 8px 32px hsl(248 15% 4% / 0.6);
+    --shadow-glow: 0 0 40px hsl(258 82% 68% / 0.3);
+    --shadow-glow-accent: 0 0 40px hsl(270 50% 60% / 0.25);
   }
 
   /* Gradient Button CSS Properties */
@@ -93,31 +108,31 @@
 
   @property --color-1 {
     syntax: '<color>';
-    initial-value: #000;
+    initial-value: #3A2A6A;
     inherits: false;
   }
 
   @property --color-2 {
     syntax: '<color>';
-    initial-value: #08012c;
+    initial-value: #9B7EDC;
     inherits: false;
   }
 
   @property --color-3 {
     syntax: '<color>';
-    initial-value: #4e1e40;
+    initial-value: #7B5CFA;
     inherits: false;
   }
 
   @property --color-4 {
     syntax: '<color>';
-    initial-value: #70464e;
+    initial-value: #4e3a8a;
     inherits: false;
   }
 
   @property --color-5 {
     syntax: '<color>';
-    initial-value: #88394c;
+    initial-value: #0B0B14;
     inherits: false;
   }
 
@@ -129,37 +144,37 @@
 
   @property --border-color-1 {
     syntax: '<color>';
-    initial-value: hsla(340, 75%, 60%, 0.2);
+    initial-value: hsla(270, 50%, 80%, 0.3);
     inherits: true;
   }
 
   @property --border-color-2 {
     syntax: '<color>';
-    initial-value: hsla(340, 75%, 40%, 0.75);
+    initial-value: hsla(258, 82%, 68%, 0.5);
     inherits: true;
   }
 
   @property --stop-1 {
     syntax: '<percentage>';
-    initial-value: 37.35%;
+    initial-value: 0%;
     inherits: false;
   }
 
   @property --stop-2 {
     syntax: '<percentage>';
-    initial-value: 61.36%;
+    initial-value: 30%;
     inherits: false;
   }
 
   @property --stop-3 {
     syntax: '<percentage>';
-    initial-value: 78.42%;
+    initial-value: 55%;
     inherits: false;
   }
 
   @property --stop-4 {
     syntax: '<percentage>';
-    initial-value: 89.52%;
+    initial-value: 80%;
     inherits: false;
   }
 
@@ -185,15 +200,15 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-    @apply font-semibold tracking-tight;
+    font-family: 'Inter', system-ui, sans-serif;
+    @apply font-bold tracking-tight;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-card/80 backdrop-blur-xl border border-border/50 rounded-xl;
-    background: linear-gradient(180deg, hsl(222 47% 12% / 0.8) 0%, hsl(222 47% 8% / 0.8) 100%);
+    @apply bg-card/80 backdrop-blur-xl border border-border/50 rounded-2xl;
+    background: linear-gradient(180deg, hsl(248 20% 14% / 0.8) 0%, hsl(248 20% 10% / 0.8) 100%);
   }
 
   .glass-card-hover {
@@ -205,8 +220,13 @@
     box-shadow: var(--shadow-glow);
   }
 
+  .hero-container {
+    @apply relative rounded-3xl overflow-hidden;
+    background: var(--gradient-hero);
+  }
+
   .glow-text {
-    text-shadow: 0 0 30px hsl(173 80% 50% / 0.5);
+    text-shadow: 0 0 30px hsl(258 82% 68% / 0.5);
   }
 
   .gradient-text {
@@ -214,13 +234,13 @@
     background-image: var(--gradient-primary);
   }
 
-  .gradient-text-accent {
+  .gradient-text-peach {
     @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-accent);
+    background-image: linear-gradient(135deg, hsl(25 100% 85%) 0%, hsl(35 100% 75%) 100%);
   }
 
   .stat-value {
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     @apply text-3xl font-bold tracking-tight;
   }
 
@@ -242,6 +262,10 @@
 
   .animate-pulse-slow {
     animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .orbit-ring {
+    @apply absolute rounded-full border border-border/20;
   }
 
   /* Gradient Button Styles */
@@ -292,53 +316,53 @@
   }
 
   .gradient-button:hover {
-    --pos-x: 0%;
-    --pos-y: 91.51%;
-    --spread-x: 120.24%;
-    --spread-y: 103.18%;
-    --color-1: #c96287;
-    --color-2: #c66c64;
-    --color-3: #cc7d23;
-    --color-4: #37140a;
-    --color-5: #000;
+    --pos-x: 50%;
+    --pos-y: 50%;
+    --spread-x: 150%;
+    --spread-y: 150%;
+    --color-1: #9F8CFF;
+    --color-2: #7B5CFA;
+    --color-3: #9B7EDC;
+    --color-4: #3A2A6A;
+    --color-5: #0B0B14;
     --border-angle: 190deg;
-    --border-color-1: hsla(340, 78%, 90%, 0.1);
-    --border-color-2: hsla(340, 75%, 90%, 0.6);
+    --border-color-1: hsla(270, 60%, 90%, 0.4);
+    --border-color-2: hsla(258, 82%, 75%, 0.7);
     --stop-1: 0%;
-    --stop-2: 8.8%;
-    --stop-3: 21.44%;
-    --stop-4: 71.34%;
-    --stop-5: 85.76%;
+    --stop-2: 20%;
+    --stop-3: 45%;
+    --stop-4: 75%;
+    --stop-5: 100%;
   }
 
   .gradient-button-variant {
-    --color-1: #000022;
-    --color-2: #1f3f6d;
-    --color-3: #469396;
-    --color-4: #f1ffa5;
+    --color-1: #121225;
+    --color-2: #1f2a4d;
+    --color-3: #3A2A6A;
+    --color-4: #9B7EDC;
     --border-angle: 200deg;
-    --border-color-1: hsla(320, 75%, 90%, 0.6);
-    --border-color-2: hsla(320, 50%, 90%, 0.15);
+    --border-color-1: hsla(270, 50%, 80%, 0.4);
+    --border-color-2: hsla(258, 82%, 60%, 0.2);
   }
 
   .gradient-button-variant:hover {
-    --pos-x: 0%;
-    --pos-y: 95.51%;
-    --spread-x: 110.24%;
-    --spread-y: 110.2%;
-    --color-1: #000020;
-    --color-2: #f1ffa5;
-    --color-3: #469396;
-    --color-4: #1f3f6d;
-    --color-5: #000;
+    --pos-x: 50%;
+    --pos-y: 80%;
+    --spread-x: 130%;
+    --spread-y: 130%;
+    --color-1: #1f2a4d;
+    --color-2: #3A2A6A;
+    --color-3: #7B5CFA;
+    --color-4: #9B7EDC;
+    --color-5: #121225;
     --stop-1: 0%;
-    --stop-2: 10%;
-    --stop-3: 35.44%;
-    --stop-4: 71.34%;
-    --stop-5: 90.76%;
+    --stop-2: 25%;
+    --stop-3: 50%;
+    --stop-4: 80%;
+    --stop-5: 100%;
     --border-angle: 210deg;
-    --border-color-1: hsla(320, 75%, 90%, 0.2);
-    --border-color-2: hsla(320, 50%, 90%, 0.75);
+    --border-color-1: hsla(270, 60%, 80%, 0.5);
+    --border-color-2: hsla(258, 82%, 68%, 0.6);
   }
 }
 
@@ -355,10 +379,10 @@
 
 @keyframes glow {
   from {
-    box-shadow: 0 0 20px hsl(173 80% 50% / 0.2);
+    box-shadow: 0 0 20px hsl(258 82% 68% / 0.2);
   }
   to {
-    box-shadow: 0 0 40px hsl(173 80% 50% / 0.4);
+    box-shadow: 0 0 40px hsl(258 82% 68% / 0.4);
   }
 }
 
@@ -371,12 +395,21 @@
   }
 }
 
+@keyframes orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* RainbowKit Customization */
 [data-rk] {
-  --rk-colors-accentColor: hsl(173 80% 50%);
-  --rk-colors-accentColorForeground: hsl(222 47% 6%);
-  --rk-colors-modalBackground: hsl(222 47% 10%);
-  --rk-colors-modalBorder: hsl(222 30% 18%);
-  --rk-colors-modalText: hsl(210 40% 98%);
-  --rk-colors-modalTextSecondary: hsl(215 20% 55%);
+  --rk-colors-accentColor: hsl(258 82% 68%);
+  --rk-colors-accentColorForeground: hsl(0 0% 98%);
+  --rk-colors-modalBackground: hsl(248 20% 12%);
+  --rk-colors-modalBorder: hsl(248 20% 18%);
+  --rk-colors-modalText: hsl(0 0% 98%);
+  --rk-colors-modalTextSecondary: hsl(250 15% 65%);
 }
