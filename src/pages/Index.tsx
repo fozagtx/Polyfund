@@ -45,16 +45,16 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Left content */}
-            <div className="text-left">
+            <div className="text-left space-y-6">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20"
               >
                 <Sparkles className="h-4 w-4 text-primary" />
                 <span className="text-sm text-primary">Built on Mantle Network</span>
@@ -64,11 +64,13 @@ const Index = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="font-sans text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.1] tracking-tight"
+                className="font-sans text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.15] tracking-tight"
               >
-                Invest in Business.
+                Where Investors
                 <br />
-                <span className="gradient-text-peach">Earn in Dividends.</span>
+                Invest In Businesses
+                <br />
+                <span className="gradient-text-peach">and Earn Dividends.</span>
               </motion.h1>
 
               <motion.div
