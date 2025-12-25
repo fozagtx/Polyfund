@@ -71,13 +71,9 @@ const Index = () => {
                   transition={{ duration: 0.6, delay: 0.1 }}
                   className="font-sans text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.1] tracking-tight"
                 >
-                  Unlock Top Business{' '}
-                  <span className="text-foreground">Investment</span>{' '}
-                  <span className="text-foreground">You Thought Was</span>{' '}
-                  <span className="text-foreground">Out of Reach –</span>
+                  Invest in Business.
                   <br />
-                  <span className="gradient-text-peach">Now Just One</span>{' '}
-                  <span className="gradient-text-peach">Click Away!</span>
+                  <span className="gradient-text-peach">Earn in Dividends.</span>
                 </motion.h1>
 
                 <motion.div
