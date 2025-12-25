@@ -68,7 +68,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+              className="font-geist text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight"
             >
               Invest in Real Businesses.{' '}
               <span className="gradient-text">Earn Real Dividends.</span>
