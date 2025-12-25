@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount } from 'wagmi';
 import { GradientButton } from '@/components/ui/gradient-button';
 import { 
   LayoutDashboard, 
@@ -13,15 +14,18 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
-  { path: '/', label: 'Home', icon: TrendingUp },
-  { path: '/businesses', label: 'Businesses', icon: Building2 },
-  { path: '/portfolio', label: 'Portfolio', icon: Wallet },
-  { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { path: '/', label: 'Home', icon: TrendingUp, requiresAuth: false },
+  { path: '/businesses', label: 'Businesses', icon: Building2, requiresAuth: false },
+  { path: '/portfolio', label: 'Portfolio', icon: Wallet, requiresAuth: false },
+  { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, requiresAuth: true },
 ];
 
 export function Header() {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isConnected } = useAccount();
+
+  const visibleNavItems = navItems.filter(item => !item.requiresAuth || isConnected);
 
   return (
     <>
@@ -46,7 +50,7 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => {
+            {visibleNavItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
                 <Link key={item.path} to={item.path}>
@@ -64,16 +68,70 @@ export function Header() {
             })}
           </div>
 
-          {/* Wallet Connect */}
+          {/* Wallet Connect with Gradient Theme */}
           <div className="hidden sm:block pl-2 pr-1">
-            <ConnectButton 
-              showBalance={false}
-              chainStatus="icon"
-              accountStatus={{
-                smallScreen: 'avatar',
-                largeScreen: 'avatar',
+            <ConnectButton.Custom>
+              {({
+                account,
+                chain,
+                openAccountModal,
+                openChainModal,
+                openConnectModal,
+                mounted,
+              }) => {
+                const ready = mounted;
+                const connected = ready && account && chain;
+
+                return (
+                  <div
+                    {...(!ready && {
+                      'aria-hidden': true,
+                      style: {
+                        opacity: 0,
+                        pointerEvents: 'none',
+                        userSelect: 'none',
+                      },
+                    })}
+                  >
+                    {(() => {
+                      if (!connected) {
+                        return (
+                          <GradientButton
+                            onClick={openConnectModal}
+                            className="min-w-0 px-5 py-3 text-sm"
+                          >
+                            <Wallet className="h-4 w-4 mr-2" />
+                            Connect
+                          </GradientButton>
+                        );
+                      }
+
+                      if (chain.unsupported) {
+                        return (
+                          <GradientButton
+                            onClick={openChainModal}
+                            variant="variant"
+                            className="min-w-0 px-5 py-3 text-sm"
+                          >
+                            Wrong Network
+                          </GradientButton>
+                        );
+                      }
+
+                      return (
+                        <GradientButton
+                          onClick={openAccountModal}
+                          variant="variant"
+                          className="min-w-0 px-5 py-3 text-sm"
+                        >
+                          {account.displayName}
+                        </GradientButton>
+                      );
+                    })()}
+                  </div>
+                );
               }}
-            />
+            </ConnectButton.Custom>
           </div>
           
           {/* Mobile Menu Button */}
@@ -104,7 +162,7 @@ export function Header() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex flex-col gap-2 p-4 rounded-2xl bg-card/95 backdrop-blur-xl border border-border/50 shadow-lg">
-                {navItems.map((item) => {
+                {visibleNavItems.map((item) => {
                   const isActive = location.pathname === item.path;
                   return (
                     <Link 
@@ -123,7 +181,68 @@ export function Header() {
                   );
                 })}
                 <div className="pt-2 border-t border-border/50">
-                  <ConnectButton />
+                  <ConnectButton.Custom>
+                    {({
+                      account,
+                      chain,
+                      openAccountModal,
+                      openChainModal,
+                      openConnectModal,
+                      mounted,
+                    }) => {
+                      const ready = mounted;
+                      const connected = ready && account && chain;
+
+                      return (
+                        <div
+                          {...(!ready && {
+                            'aria-hidden': true,
+                            style: {
+                              opacity: 0,
+                              pointerEvents: 'none',
+                              userSelect: 'none',
+                            },
+                          })}
+                        >
+                          {(() => {
+                            if (!connected) {
+                              return (
+                                <GradientButton
+                                  onClick={openConnectModal}
+                                  className="w-full"
+                                >
+                                  <Wallet className="h-4 w-4 mr-2" />
+                                  Connect Wallet
+                                </GradientButton>
+                              );
+                            }
+
+                            if (chain.unsupported) {
+                              return (
+                                <GradientButton
+                                  onClick={openChainModal}
+                                  variant="variant"
+                                  className="w-full"
+                                >
+                                  Wrong Network
+                                </GradientButton>
+                              );
+                            }
+
+                            return (
+                              <GradientButton
+                                onClick={openAccountModal}
+                                variant="variant"
+                                className="w-full"
+                              >
+                                {account.displayName}
+                              </GradientButton>
+                            );
+                          })()}
+                        </div>
+                      );
+                    }}
+                  </ConnectButton.Custom>
                 </div>
               </div>
             </motion.div>
