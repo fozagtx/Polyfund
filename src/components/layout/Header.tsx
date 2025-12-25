@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { Button } from '@/components/ui/button';
+import { GradientButton } from '@/components/ui/gradient-button';
 import { 
   LayoutDashboard, 
   Building2, 
@@ -24,100 +24,112 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
-      <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
+    <>
+      {/* Floating Bottom Navigation */}
+      <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex items-center gap-2 p-2 rounded-full bg-card/90 backdrop-blur-xl border border-border/50 shadow-lg"
+        >
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2 px-4">
             <div className="relative h-8 w-8">
               <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary to-cyan-400 animate-pulse-slow" />
               <div className="absolute inset-0.5 rounded-lg bg-background flex items-center justify-center">
                 <span className="font-display font-bold text-primary">P</span>
               </div>
             </div>
-            <span className="font-display text-xl font-bold">Polyfunds</span>
+            <span className="font-display text-lg font-bold hidden sm:block">Polyfunds</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
                 <Link key={item.path} to={item.path}>
-                  <Button
-                    variant={isActive ? 'secondary' : 'ghost'}
-                    size="sm"
-                    className={isActive ? 'text-primary' : 'text-muted-foreground'}
+                  <GradientButton
+                    variant={isActive ? 'default' : 'variant'}
+                    className={`min-w-0 px-5 py-3 text-sm ${
+                      isActive ? '' : 'opacity-80 hover:opacity-100'
+                    }`}
                   >
-                    <item.icon className="h-4 w-4" />
+                    <item.icon className="h-4 w-4 mr-2" />
                     {item.label}
-                  </Button>
+                  </GradientButton>
                 </Link>
               );
             })}
-          </nav>
+          </div>
 
           {/* Wallet Connect */}
-          <div className="flex items-center gap-2">
-            <div className="hidden sm:block">
-              <ConnectButton 
-                showBalance={false}
-                chainStatus="icon"
-                accountStatus={{
-                  smallScreen: 'avatar',
-                  largeScreen: 'full',
-                }}
-              />
-            </div>
-            
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
+          <div className="hidden sm:block pl-2 pr-1">
+            <ConnectButton 
+              showBalance={false}
+              chainStatus="icon"
+              accountStatus={{
+                smallScreen: 'avatar',
+                largeScreen: 'avatar',
+              }}
+            />
           </div>
-        </div>
-      </div>
+          
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-3 rounded-full bg-secondary/50 hover:bg-secondary transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </motion.div>
+      </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-border/50 bg-background/95 backdrop-blur-xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-background/80 backdrop-blur-md md:hidden"
+            onClick={() => setMobileMenuOpen(false)}
           >
-            <nav className="container mx-auto px-4 py-4 flex flex-col gap-2">
-              {navItems.map((item) => {
-                const isActive = location.pathname === item.path;
-                return (
-                  <Link 
-                    key={item.path} 
-                    to={item.path}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <Button
-                      variant={isActive ? 'secondary' : 'ghost'}
-                      className={`w-full justify-start ${isActive ? 'text-primary' : 'text-muted-foreground'}`}
+            <motion.div
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 100 }}
+              className="absolute bottom-24 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-sm"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex flex-col gap-2 p-4 rounded-2xl bg-card/95 backdrop-blur-xl border border-border/50 shadow-lg">
+                {navItems.map((item) => {
+                  const isActive = location.pathname === item.path;
+                  return (
+                    <Link 
+                      key={item.path} 
+                      to={item.path}
+                      onClick={() => setMobileMenuOpen(false)}
                     >
-                      <item.icon className="h-4 w-4 mr-2" />
-                      {item.label}
-                    </Button>
-                  </Link>
-                );
-              })}
-              <div className="pt-4 border-t border-border/50 sm:hidden">
-                <ConnectButton />
+                      <GradientButton
+                        variant={isActive ? 'default' : 'variant'}
+                        className="w-full justify-start"
+                      >
+                        <item.icon className="h-4 w-4 mr-2" />
+                        {item.label}
+                      </GradientButton>
+                    </Link>
+                  );
+                })}
+                <div className="pt-2 border-t border-border/50">
+                  <ConnectButton />
+                </div>
               </div>
-            </nav>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }
