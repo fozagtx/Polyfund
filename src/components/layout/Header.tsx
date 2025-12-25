@@ -27,14 +27,14 @@ export function Header() {
 
   return (
     <>
-      {/* Fixed Top Navigation - Transparent */}
+      {/* Fixed Top Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <motion.nav
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center justify-center gap-8"
+            className="flex items-center justify-center gap-8 px-6 py-3 rounded-full bg-card/60 backdrop-blur-xl border border-border/30"
           >
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
