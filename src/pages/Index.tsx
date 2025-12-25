@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Layout } from '@/components/layout';
 import { PlatformStats } from '@/components/stats';
 import { BusinessCard } from '@/components/business';
+import { OrbitVisualization } from '@/components/hero';
+import { GradientButton } from '@/components/ui/gradient-button';
 import { mockBusinesses, mockPlatformStats } from '@/data/mockData';
 import { 
   ArrowRight, 
@@ -42,85 +42,115 @@ const Index = () => {
     },
   ];
 
+  // Partner logos
+  const partners = ['Dreamure', 'SWITCH.WIN', 'Sphere', 'PinSpace', 'Visionix'];
+
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center overflow-hidden">
-        {/* Background effects */}
-        <div className="absolute inset-0 bg-hero-pattern" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-hero" />
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-peach/10 rounded-full blur-[120px]" />
+          <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] bg-lavender/10 rounded-full blur-[100px]" />
+          <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-violet/20 rounded-full blur-[150px]" />
+        </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
+          {/* Hero container with rounded corners */}
+          <div className="hero-container p-8 lg:p-16">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+              {/* Left content */}
+              <div className="text-left">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
+                >
+                  <Sparkles className="h-4 w-4 text-primary" />
+                  <span className="text-sm text-primary">Built on Mantle Network</span>
+                </motion.div>
+
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="font-sans text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.1] tracking-tight"
+                >
+                  Unlock Top Business{' '}
+                  <span className="text-foreground">Investment</span>{' '}
+                  <span className="text-foreground">You Thought Was</span>{' '}
+                  <span className="text-foreground">Out of Reach –</span>
+                  <br />
+                  <span className="gradient-text-peach">Now Just One</span>{' '}
+                  <span className="gradient-text-peach">Click Away!</span>
+                </motion.h1>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="flex flex-col sm:flex-row items-start gap-4 mt-8"
+                >
+                  <Link to="/businesses">
+                    <GradientButton className="gap-2 text-base">
+                      Start Investing
+                      <ArrowRight className="h-5 w-5" />
+                    </GradientButton>
+                  </Link>
+                </motion.div>
+
+                {/* Social proof badge */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  className="inline-flex items-center gap-2 mt-8"
+                >
+                  <div className="relative">
+                    <div className="w-2 h-2 bg-success rounded-full" />
+                    <div className="absolute inset-0 w-2 h-2 bg-success rounded-full animate-ping" />
+                  </div>
+                  <span className="text-sm text-muted-foreground">Live on Mantle</span>
+                </motion.div>
+              </div>
+
+              {/* Right content - Orbit visualization */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative"
+              >
+                <OrbitVisualization 
+                  centerValue={`${mockPlatformStats.totalBusinesses}+`}
+                  centerLabel="Businesses"
+                />
+              </motion.div>
+            </div>
+
+            {/* Partner logos */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="mt-16 pt-8 border-t border-border/20"
             >
-              <Badge variant="outline" className="mb-6 gap-2 px-4 py-2">
-                <Sparkles className="h-4 w-4 text-primary" />
-                Built on Mantle Network
-              </Badge>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-geist text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight"
-            >
-              Invest in Real Businesses.{' '}
-              <span className="gradient-text">Earn Real Dividends.</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
-            >
-              Polyfunds enables fractional ownership of verified businesses through 
-              blockchain technology. Buy tokens, earn dividends, build wealth.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
-              <Link to="/businesses">
-                <Button variant="gradient" size="xl" className="gap-2">
-                  Explore Businesses
-                  <ArrowRight className="h-5 w-5" />
-                </Button>
-              </Link>
-              <Link to="/dashboard">
-                <Button variant="outline" size="xl" className="gap-2">
-                  <Zap className="h-5 w-5" />
-                  List Your Business
-                </Button>
-              </Link>
+              <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-16">
+                {partners.map((partner) => (
+                  <span 
+                    key={partner} 
+                    className="text-muted-foreground/50 text-sm font-medium tracking-wider"
+                  >
+                    {partner}
+                  </span>
+                ))}
+              </div>
             </motion.div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex justify-center pt-2"
-          >
-            <div className="w-1 h-2 rounded-full bg-primary" />
-          </motion.div>
-        </motion.div>
       </section>
 
       {/* Platform Stats */}
@@ -135,7 +165,7 @@ const Index = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="font-display text-3xl font-bold mb-4">
+            <h2 className="font-sans text-3xl font-bold mb-4">
               Why <span className="gradient-text">Polyfunds</span>?
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
@@ -156,7 +186,7 @@ const Index = () => {
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 mb-4">
                   <feature.icon className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="font-display font-semibold mb-2">{feature.title}</h3>
+                <h3 className="font-sans font-semibold mb-2">{feature.title}</h3>
                 <p className="text-sm text-muted-foreground">{feature.description}</p>
               </motion.div>
             ))}
@@ -174,7 +204,7 @@ const Index = () => {
             className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4"
           >
             <div>
-              <h2 className="font-display text-3xl font-bold mb-2">
+              <h2 className="font-sans text-3xl font-bold mb-2">
                 Featured <span className="gradient-text">Businesses</span>
               </h2>
               <p className="text-muted-foreground">
@@ -182,9 +212,9 @@ const Index = () => {
               </p>
             </div>
             <Link to="/businesses">
-              <Button variant="outline" className="gap-2">
+              <GradientButton variant="variant" className="gap-2 min-w-0 px-6 py-3">
                 View All <ArrowRight className="h-4 w-4" />
-              </Button>
+              </GradientButton>
             </Link>
           </motion.div>
 
@@ -210,10 +240,10 @@ const Index = () => {
             className="relative glass-card p-8 lg:p-12 text-center overflow-hidden"
           >
             {/* Background gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-lavender/10" />
             
             <div className="relative z-10">
-              <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
+              <h2 className="font-sans text-3xl lg:text-4xl font-bold mb-4">
                 Ready to Start Investing?
               </h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
@@ -221,9 +251,9 @@ const Index = () => {
                 tokenized real-world businesses today.
               </p>
               <Link to="/businesses">
-                <Button variant="gradient" size="xl" className="gap-2">
+                <GradientButton className="gap-2 text-base">
                   Get Started <ArrowRight className="h-5 w-5" />
-                </Button>
+                </GradientButton>
               </Link>
             </div>
           </motion.div>
