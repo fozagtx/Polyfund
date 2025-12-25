@@ -1,8 +1,9 @@
 import '@rainbow-me/rainbowkit/styles.css';
-import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
+import { RainbowKitProvider, darkTheme, lightTheme } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ThemeProvider, useTheme } from 'next-themes';
 import { Toaster } from '@/components/ui/toaster';
 import { Toaster as Sonner } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -17,34 +18,53 @@ import NotFound from './pages/NotFound';
 
 const queryClient = new QueryClient();
 
+function RainbowKitWrapper({ children }: { children: React.ReactNode }) {
+  const { resolvedTheme } = useTheme();
+  
+  const rainbowTheme = resolvedTheme === 'dark' 
+    ? darkTheme({
+        accentColor: 'hsl(258, 82%, 68%)',
+        accentColorForeground: 'white',
+        borderRadius: 'medium',
+        fontStack: 'system',
+      })
+    : lightTheme({
+        accentColor: 'hsl(258, 82%, 58%)',
+        accentColorForeground: 'white',
+        borderRadius: 'medium',
+        fontStack: 'system',
+      });
+
+  return (
+    <RainbowKitProvider theme={rainbowTheme}>
+      {children}
+    </RainbowKitProvider>
+  );
+}
+
 const App = () => (
-  <WagmiProvider config={config}>
-    <QueryClientProvider client={queryClient}>
-      <RainbowKitProvider
-        theme={darkTheme({
-          accentColor: 'hsl(173, 80%, 50%)',
-          accentColorForeground: 'hsl(222, 47%, 6%)',
-          borderRadius: 'medium',
-          fontStack: 'system',
-        })}
-      >
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/businesses" element={<Businesses />} />
-              <Route path="/businesses/:id" element={<BusinessDetail />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </RainbowKitProvider>
-    </QueryClientProvider>
-  </WagmiProvider>
+  <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitWrapper>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/businesses" element={<Businesses />} />
+                <Route path="/businesses/:id" element={<BusinessDetail />} />
+                <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </RainbowKitWrapper>
+      </QueryClientProvider>
+    </WagmiProvider>
+  </ThemeProvider>
 );
 
 export default App;

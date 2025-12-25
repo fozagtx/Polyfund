@@ -5,8 +5,84 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light mode (default) */
   :root {
-    /* Marketeam-inspired color palette */
+    --background: 0 0% 100%;
+    --foreground: 248 15% 10%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 248 15% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 248 15% 10%;
+
+    /* Primary purple accent */
+    --primary: 258 82% 58%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 248 15% 94%;
+    --secondary-foreground: 248 15% 10%;
+
+    --muted: 248 10% 92%;
+    --muted-foreground: 248 15% 45%;
+
+    /* Lavender accent */
+    --accent: 270 50% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 70% 40%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 248 15% 10%;
+
+    /* Peach highlight */
+    --peach: 25 100% 75%;
+    --peach-foreground: 248 15% 10%;
+
+    /* Lavender */
+    --lavender: 270 50% 58%;
+    --lavender-foreground: 0 0% 100%;
+
+    /* Deep violet */
+    --violet: 258 50% 45%;
+    --violet-foreground: 0 0% 100%;
+
+    --border: 248 15% 88%;
+    --input: 248 15% 88%;
+    --ring: 258 82% 58%;
+
+    --radius: 1rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 248 15% 10%;
+    --sidebar-primary: 258 82% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 248 15% 94%;
+    --sidebar-accent-foreground: 248 15% 10%;
+    --sidebar-border: 248 15% 88%;
+    --sidebar-ring: 258 82% 58%;
+
+    /* Custom gradients - Light mode */
+    --gradient-primary: linear-gradient(135deg, hsl(25 100% 75%) 0%, hsl(270 50% 58%) 50%, hsl(258 50% 45%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(25 100% 85% / 0.4) 0%, hsl(270 50% 68% / 0.3) 30%, hsl(258 50% 60% / 0.2) 60%, hsl(0 0% 100%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100% / 0.9) 0%, hsl(248 15% 98% / 0.9) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(258 82% 68% / 0.15) 0%, transparent 70%);
+    --gradient-button: linear-gradient(135deg, hsl(258 82% 58%) 0%, hsl(270 60% 50%) 100%);
+
+    /* Shadows - Light mode */
+    --shadow-sm: 0 2px 8px hsl(248 15% 50% / 0.1);
+    --shadow-md: 0 4px 16px hsl(248 15% 50% / 0.15);
+    --shadow-lg: 0 8px 32px hsl(248 15% 50% / 0.2);
+    --shadow-glow: 0 0 40px hsl(258 82% 68% / 0.2);
+    --shadow-glow-accent: 0 0 40px hsl(270 50% 60% / 0.15);
+  }
+
+  /* Dark mode */
+  .dark {
     --background: 248 15% 6%;
     --foreground: 0 0% 98%;
 
@@ -55,8 +131,6 @@
     --input: 248 20% 18%;
     --ring: 258 82% 68%;
 
-    --radius: 1rem;
-
     --sidebar-background: 248 20% 10%;
     --sidebar-foreground: 0 0% 98%;
     --sidebar-primary: 258 82% 68%;
@@ -66,14 +140,14 @@
     --sidebar-border: 248 20% 18%;
     --sidebar-ring: 258 82% 68%;
 
-    /* Custom gradients */
+    /* Custom gradients - Dark mode */
     --gradient-primary: linear-gradient(135deg, hsl(25 100% 85%) 0%, hsl(270 50% 68%) 50%, hsl(258 50% 28%) 100%);
     --gradient-hero: linear-gradient(135deg, hsl(25 100% 85% / 0.3) 0%, hsl(270 50% 68% / 0.2) 30%, hsl(258 50% 28% / 0.5) 60%, hsl(248 15% 6%) 100%);
     --gradient-card: linear-gradient(180deg, hsl(248 20% 14% / 0.9) 0%, hsl(248 20% 10% / 0.9) 100%);
     --gradient-glow: radial-gradient(ellipse at center, hsl(258 82% 68% / 0.2) 0%, transparent 70%);
     --gradient-button: linear-gradient(135deg, hsl(258 82% 68%) 0%, hsl(270 60% 55%) 100%);
 
-    /* Shadows */
+    /* Shadows - Dark mode */
     --shadow-sm: 0 2px 8px hsl(248 15% 4% / 0.4);
     --shadow-md: 0 4px 16px hsl(248 15% 4% / 0.5);
     --shadow-lg: 0 8px 32px hsl(248 15% 4% / 0.6);
