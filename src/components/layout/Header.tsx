@@ -6,7 +6,6 @@ import {
   LayoutDashboard, 
   Building2, 
   Wallet, 
-  TrendingUp,
   Menu,
   X
 } from 'lucide-react';
@@ -14,7 +13,6 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
-  { path: '/', label: 'Home', icon: TrendingUp, requiresAuth: false },
   { path: '/businesses', label: 'Businesses', icon: Building2, requiresAuth: false },
   { path: '/portfolio', label: 'Portfolio', icon: Wallet, requiresAuth: false },
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, requiresAuth: true },
@@ -29,48 +27,48 @@ export function Header() {
 
   return (
     <>
-      {/* Fixed Top Navigation */}
+      {/* Fixed Top Navigation - Transparent */}
       <header className="fixed top-0 left-0 right-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <motion.nav
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center justify-between px-6 py-3 rounded-full bg-card/80 backdrop-blur-xl border border-border/30"
+            className="flex items-center justify-between"
           >
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
               <div className="relative h-8 w-8">
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary to-lavender animate-pulse-slow" />
-                <div className="absolute inset-0.5 rounded-lg bg-background flex items-center justify-center">
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary to-lavender" />
+                <div className="absolute inset-0.5 rounded-lg bg-background/90 flex items-center justify-center">
                   <span className="font-sans font-bold text-primary">P</span>
                 </div>
               </div>
-              <span className="font-sans text-lg font-bold hidden sm:block">Polyfunds</span>
+              <span className="font-sans text-lg font-bold">Polyfunds</span>
             </Link>
 
             {/* Desktop Navigation - Center */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden md:flex items-center gap-6">
               {visibleNavItems.map((item) => {
                 const isActive = location.pathname === item.path;
                 return (
                   <Link key={item.path} to={item.path}>
-                    <button
-                      className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
+                    <span
+                      className={`text-sm font-medium transition-colors ${
                         isActive 
                           ? 'text-foreground' 
                           : 'text-muted-foreground hover:text-foreground'
                       }`}
                     >
                       {item.label}
-                    </button>
+                    </span>
                   </Link>
                 );
               })}
             </div>
 
-            {/* Right side - Auth buttons */}
-            <div className="hidden sm:flex items-center gap-3">
+            {/* Right side - Connect Wallet */}
+            <div className="hidden sm:flex items-center">
               <ConnectButton.Custom>
                 {({
                   account,
@@ -93,25 +91,16 @@ export function Header() {
                           userSelect: 'none',
                         },
                       })}
-                      className="flex items-center gap-3"
                     >
                       {(() => {
                         if (!connected) {
                           return (
-                            <>
-                              <button
-                                onClick={openConnectModal}
-                                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                              >
-                                Log In
-                              </button>
-                              <GradientButton
-                                onClick={openConnectModal}
-                                className="min-w-0 px-5 py-2.5 text-sm"
-                              >
-                                Join Now
-                              </GradientButton>
-                            </>
+                            <GradientButton
+                              onClick={openConnectModal}
+                              className="min-w-0 px-5 py-2.5 text-sm"
+                            >
+                              Connect Wallet
+                            </GradientButton>
                           );
                         }
 
@@ -145,7 +134,7 @@ export function Header() {
             
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 rounded-full bg-secondary/50 hover:bg-secondary transition-colors"
+              className="md:hidden p-2 rounded-full bg-foreground/10 hover:bg-foreground/20 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -168,7 +157,7 @@ export function Header() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="absolute top-24 left-4 right-4"
+              className="absolute top-20 left-4 right-4"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex flex-col gap-2 p-4 rounded-2xl bg-card/95 backdrop-blur-xl border border-border/50 shadow-lg">
