@@ -14,6 +14,7 @@ import Businesses from './pages/Businesses';
 import BusinessDetail from './pages/BusinessDetail';
 import Portfolio from './pages/Portfolio';
 import Dashboard from './pages/Dashboard';
+import Admin from './pages/Admin';
 import NotFound from './pages/NotFound';
 
 const queryClient = new QueryClient();
@@ -57,6 +58,7 @@ const App = () => (
                 <Route path="/businesses/:id" element={<BusinessDetail />} />
                 <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/admin" element={<Admin />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>

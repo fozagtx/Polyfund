@@ -8,7 +8,8 @@ import {
   Building2, 
   Wallet, 
   Menu,
-  X
+  X,
+  Shield
 } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -17,6 +18,7 @@ const navItems = [
   { path: '/businesses', label: 'Businesses', icon: Building2, requiresAuth: false },
   { path: '/portfolio', label: 'Portfolio', icon: Wallet, requiresAuth: false },
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, requiresAuth: true },
+  { path: '/admin', label: 'Admin', icon: Shield, requiresAuth: true },
 ];
 
 export function Header() {
